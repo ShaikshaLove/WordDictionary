@@ -40,6 +40,7 @@ public class WordServiceImpl implements IWordService {
             while ((line = reader.readLine()) != null) {
                 String[] words = line.split(" ");
                 for(String word:words){
+                    // checking the word is available or not in the database
                     if(!(wordRepository.findWordCountByWord(word)>0))
                     wordList.add(new Word(word));
                 }
