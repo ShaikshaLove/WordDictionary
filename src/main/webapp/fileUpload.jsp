@@ -47,7 +47,7 @@
 
         <div class="form-group">
             <label for="file"><h4>Select File:</h4>&nbsp;&nbsp;&nbsp;</label>
-            <input type="file" class="form-control" id="file" name="file">
+            <input type="file" class="form-control" id="file" name="myFile">
         </div>
         &nbsp;&nbsp;&nbsp;
         <button type="submit" class="btn btn-danger">Upload</button>
