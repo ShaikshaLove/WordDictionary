@@ -48,12 +48,18 @@ public class WordServiceImpl implements IWordService {
             while ((line = reader.readLine()) != null) {
                 String[] words = line.split(" ");
                 for(String word:words){
+<<<<<<< HEAD
                     String lowerCase=word.toLowerCase().trim();
                     // Checking the word is existed in the db or not
                     //Word fetchWord=wordRepository.findWordByName(lowerCase);
                     if(!isWordAvailble(lowerCase))
                         //saving the word in db only if the word is not available in the DB
                      wordRepository.save(new Word(lowerCase));
+=======
+                    // checking the word is available or not in the database
+                    if(!(wordRepository.findWordCountByWord(word)>0))
+                    wordList.add(new Word(word));
+>>>>>>> 5787b1c4957ff219e755bee0c0bdec15f049ca84
                 }
             }
     }
