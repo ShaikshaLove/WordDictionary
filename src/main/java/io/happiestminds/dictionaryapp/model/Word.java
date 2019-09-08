@@ -10,27 +10,40 @@ public class Word {
     @Id
     @GeneratedValue(generator = "sequence")
     private long wordId;
+    private String name;
+    private String meaning;
 
-    private String word;
+    public void setMeaning(String meaning) {
+        this.meaning = meaning;
+    }
 
     public void setWordId(long wordId) {
         this.wordId = wordId;
+    }
+
+    public String getMeaning() {
+        return meaning;
     }
 
     public long getWordId() {
         return wordId;
     }
 
-    public Word(String word) {
-        this.word = word;
+    public String getName() {
+        return name;
     }
 
-    public String getWord() {
-        return word;
+    public void setName(String name,String meaning) {
+        this.name = name;
     }
 
-    public void setWord(String word) {
-             this.word = word;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Word(String name) {
+        this.name = name;
+        this.meaning="NA";
     }
 
     public Word() {
@@ -38,9 +51,9 @@ public class Word {
 
     @Override
     public String toString() {
-        return "Word{" +
-                "wordId=" + wordId +
-                ", word='" + word + '\'' +
-                '}';
+        return "Word [" +
+                "  wordId= " + wordId +
+                ", name= " + name +
+                ", meaning= " + meaning +"]";
     }
 }

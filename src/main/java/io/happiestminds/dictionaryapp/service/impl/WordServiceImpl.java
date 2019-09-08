@@ -22,32 +22,39 @@ public class WordServiceImpl implements IWordService {
     private WordRepository wordRepository;
 
     @Override
-    public Word getWord(String wordName) {
-        Word word=wordRepository.findWordByWord(wordName);
+    public Word getWord(String name) {
+        Word word=wordRepository.findWordByName(name);
         if(word==null)
-            throw new WordNotFoundException(" The Word, "+wordName+ " is not available");
+            throw new WordNotFoundException(" The Word, "+name+ " is not available");
         return word ;
     }
 
     @Override
-    public boolean saveAllWords(MultipartFile multipartFile) {
-        boolean duplicatesFound=false;
-        try {
-            ArrayList<Word> wordList=new ArrayList<>();
+    public boolean isWordAvailble(String wordName) {
+        try{
+            getWord(wordName);
+            return true;
+        }catch(WordNotFoundException e){
+            return false;
+        }
+    }
+
+    @Override
+    public void saveAllWords(MultipartFile multipartFile) throws IOException {
+
             InputStream is = multipartFile.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             String line = null;
             while ((line = reader.readLine()) != null) {
                 String[] words = line.split(" ");
                 for(String word:words){
-                    if(!(wordRepository.findWordCountByWord(word)>0))
-                    wordList.add(new Word(word));
+                    String lowerCase=word.toLowerCase().trim();
+                    // Checking the word is existed in the db or not
+                    //Word fetchWord=wordRepository.findWordByName(lowerCase);
+                    if(!isWordAvailble(lowerCase))
+                        //saving the word in db only if the word is not available in the DB
+                     wordRepository.save(new Word(lowerCase));
                 }
             }
-            wordRepository.saveAll(wordList);
-          } catch (IOException e) {
-            e.printStackTrace();
-         }
-        return duplicatesFound;
     }
 }

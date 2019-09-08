@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WordRepository extends JpaRepository<Word,Long> {
-    @Query("select count(wordId) from io.happiestminds.dictionaryapp.model.Word where word=?1")
-    int findWordCountByWord(String word);
+    @Query("select count(wordId) from io.happiestminds.dictionaryapp.model.Word where  name=?1")
+    int findWordCountByName(String name);
 
-    Word findWordByWord(String word);
+    Word findWordByName(String name);
 }
