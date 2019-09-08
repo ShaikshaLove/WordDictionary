@@ -1,3 +1,5 @@
 # WordDictionary
 
-The project has used spring boot+ spring data jpa+ h2 database
+The project has used spring boot+ spring data jpa+ h2 database and JSP for UI
+
+You can just run 
